@@ -71,4 +71,14 @@ class GoalController extends Controller
             return response()->json('error');
         }
     }
+
+    public function delete(int $id)
+    {
+        $goal = Goal::find($id);
+        if (!$goal->delete()) {
+            return response()->json('Error: Goal Not Deleted');
+        }
+
+        return response()->json('Goal Deleted');
+    }
 }

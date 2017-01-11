@@ -19,7 +19,7 @@
                 </a>
              </div>
             <div class="panel-body">
-                <goal v-for="goal in goals" :goal="goal" :edit-child="edit"></goal>
+                <goal v-for="goal in goals" :goal="goal" :edit-child="edit" :delete-child="destroy"></goal>
             </div>
         </div>
 
@@ -236,6 +236,16 @@ export default {
         },
 
         /**
+         * Destroy the given client.
+         */
+        destroy(goal_id) {
+            this.$http.delete('/api/goal-delete/' + goal_id)
+                    .then(response => {
+                        this.getGoals();
+                    });
+        },
+
+        /**
          * Create a new goal
          */
         store() {
@@ -286,7 +296,8 @@ export default {
     },
 
     props: {
-        editChild: Function
+        editChild: Function,
+        deleteChild: Function
     }
 }
 </script>
