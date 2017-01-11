@@ -1,4 +1,9 @@
 <style scoped>
+    article {
+        border: 1px solid #d3e0e9;
+        max-width: 25%;
+        padding: 1em;
+    }
 </style>
 
 <template>
