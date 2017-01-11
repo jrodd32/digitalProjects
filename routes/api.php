@@ -18,3 +18,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/goals', 'GoalController@goals');
+Route::post('/goal-save', 'GoalController@save');
+Route::put('/goal-edit', 'GoalController@edit');

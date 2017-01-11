@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Goal;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -44,15 +45,30 @@ class GoalController extends Controller
 
     public function goals()
     {
-        return response()->json([
-            '0' => [
-                'name' => 'goal 1',
-                'description' => 'goal 1 description'
-            ],
-            '1' => [
-                'name' => 'goal 2',
-                'description' => 'goal 2 description'
-            ]
+        return response()->json(Goal::all());
+    }
+
+    public function save(Request $request)
+    {
+        $goal = Goal::create([
+            'name' => $request->name,
+            'description' => $request->description
         ]);
+
+        return response()->json([
+            'data' => $goal
+        ]);
+    }
+
+    public function edit(Request $request)
+    {
+        $goal = Goal::find($request->id);
+        $goal->name = $request->name;
+        $goal->description = $request->description;
+        if ($goal->save()) {
+            return response()->json('Goal Saved');
+        } else {
+            return response()->json('error');
+        }
     }
 }
