@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
+
+Route::get('/', 'Auth\AuthController@redirectToProvider');
+Route::get('/authorize', 'Auth\AuthController@handleProviderCallback');
 
 Route::get('/home', 'HomeController@index');
 Route::get('/goals', 'GoalController@index');
