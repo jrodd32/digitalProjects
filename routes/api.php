@@ -28,4 +28,4 @@ Route::delete('/goal-delete/{id}', 'GoalController@delete');
 
 Route::get('/profile', function (Request $request) {
     return response()->json(Auth::user());
-});
+})->middleware('auth:api');
