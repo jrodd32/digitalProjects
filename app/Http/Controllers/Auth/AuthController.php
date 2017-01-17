@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Socialite;
+use App\User;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->User = new User;
+    }
     /**
      * Redirect the user to the Basecamp authentication page.
      *
@@ -26,8 +31,11 @@ class AuthController extends Controller
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('37signals')->user();
-        return response()->json($user);
-        // $user->token;
+        $user = $this->User->findOrCreateBasecampUser(
+            Socialite::driver('37signals')->user()
+        );
+
+        auth()->login($user);
+        return redirect('/');
     }
 }

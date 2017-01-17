@@ -14,9 +14,9 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-        // add your listeners (aka providers) here
-        'SocialiteProviders\ThirtySevenSignals\ThirtySevenSignalsExtendSocialite@handle',
-    ],
+            // add your listeners (aka providers) here
+            'SocialiteProviders\ThirtySevenSignals\ThirtySevenSignalsExtendSocialite@handle',
+        ],
     ];
 
     /**

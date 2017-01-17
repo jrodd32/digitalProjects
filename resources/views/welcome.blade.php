@@ -59,9 +59,14 @@ html, body {
     <div class="title m-b-md">
         Doe-Anderson Digital
     </div>
-
-    <div class="links">
-        <a href="{{ url('/goals') }}">Goals</a>
-    </div>
+    @if (Auth::check())
+        Welcome {{ Auth::user()->name }}. You currently have access to:
+        <div class="links">
+            <a href="{{ url('/goals') }}">Goals</a> |
+            <a href="{{ url('/profile') }}">Profile</a>
+        </div>
+    @else
+        You are not signed in. We current support <a href="{{ url('/auth/basecamp') }}">logging in with Basecamp</a>. More providers will be coming soon.
+    @endif
 </div>
 @endsection

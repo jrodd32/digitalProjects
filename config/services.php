@@ -35,4 +35,11 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'basecamp' => [
+        'key' => env('THIRTYSEVENSIGNALS_KEY'),
+        'secret' => env('THIRTYSEVENSIGNALS_SECRET'),
+        'callback_url' => env('THIRTYSEVENSIGNALS_REDIRECT_URI')
+
+    ]
+
 ];

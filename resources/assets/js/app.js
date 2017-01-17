@@ -32,6 +32,11 @@ Vue.component(
     'goals',
     require('./components/goals/Goals.vue')
 );
+
+Vue.component(
+    'profile',
+    require('./components/profile/Profile.vue')
+);
 const app = new Vue({
     el: '#app'
 });

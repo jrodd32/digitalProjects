@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'basecamp_id', 'avatar', 'basecamp_token',
     ];
 
     /**
@@ -27,4 +27,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function findOrCreateBasecampUser($basecampUser)
+    {
+        $user = User::firstOrNew(['basecamp_id' => $basecampUser->id]);
+
+        if (!$user->exists) {
+            $user->fill([
+                'name' => $basecampUser->name,
+                'email' => $basecampUser->email,
+                // 'avatar' => $basecampUser->avatar,
+                'basecamp_id' => $basecampUser->id,
+                'basecamp_token' => $basecampUser->token
+            ])->save();
+        }
+
+        return $user;
+    }
 }

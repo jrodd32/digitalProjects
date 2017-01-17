@@ -12,12 +12,12 @@
 <template>
     <div class="container">
         <div class="panel panel-default">
-             <div class="panel-heading">
+            <div class="panel-heading">
                 <h1>Goals</h1>
                 <a class="action-link" @click="showCreateGoalForm">
                     Create New Goal
                 </a>
-             </div>
+            </div>
             <div class="panel-body">
                 <goal v-for="goal in goals" :goal="goal" :edit-child="edit" :delete-child="destroy"></goal>
             </div>
