@@ -11,9 +11,8 @@
 |
 */
 
-Auth::routes();
-
-Route::get('/', 'Auth\AuthController@redirectToProvider');
+Route::get('/', 'HomeController@index');
+Route::get('/login', 'Auth\AuthController@redirectToProvider');
 Route::get('/authorize', 'Auth\AuthController@handleProviderCallback');
 
 Route::get('/home', 'HomeController@index');
