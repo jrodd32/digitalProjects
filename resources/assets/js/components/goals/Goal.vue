@@ -10,6 +10,7 @@
     <article>
         <h2>{{ goal.name }}</h2>
         <p>{{ goal.description }}</p>
+        <p>{{ goal.type }}</p>
         <a class="action-link" @click="editChild(goal)">Edit</a>
         <a class="action-link" @click="deleteChild(goal.id)">Delete</a>
     </article>

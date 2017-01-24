@@ -165,7 +165,8 @@ function goalsInitalState() {
         goal: {
             id: '',
             name: '',
-            description: ''
+            description: '',
+            type: ''
         }
     }
 }
