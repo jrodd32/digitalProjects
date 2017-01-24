@@ -60,11 +60,23 @@ html, body {
         Doe-Anderson Digital
     </div>
     @if (Auth::check())
+    <div class="container">
+
         Welcome {{ Auth::user()->name }}. You currently have access to:
         <div class="links">
             <a href="{{ url('/goals') }}">Goals</a> |
             <a href="{{ url('/profile') }}">Profile</a>
         </div>
+
+        <!-- Passport Clients:
+        <passport-clients></passport-clients>
+
+        Passport Authorized Clients:
+        <passport-authorized-clients></passport-authorized-clients>
+
+        Passport Personal Access Tokens:
+        <passport-personal-access-tokens></passport-personal-access-tokens> -->
+    </div>
     @else
         You are not signed in. We current support <a href="{{ url('/auth/basecamp') }}">logging in with Basecamp</a>. More providers will be coming soon.
     @endif
