@@ -29,6 +29,7 @@ class GoalController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'description' => 'required',
+            'type' => 'required'
         ]);
     }
 
@@ -51,7 +52,8 @@ class GoalController extends Controller
     {
         $goal = Goal::create([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'type' => $request->type
         ]);
 
         return response()->json([
@@ -64,6 +66,7 @@ class GoalController extends Controller
         $goal = Goal::find($request->id);
         $goal->name = $request->name;
         $goal->description = $request->description;
+        $goal->type = $request->type;
         if ($goal->save()) {
             return response()->json('Goal Saved');
         } else {

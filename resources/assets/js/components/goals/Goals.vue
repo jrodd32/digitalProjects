@@ -67,10 +67,27 @@
                                 <label class="col-md-3 control-label">Description</label>
 
                                 <div class="col-md-7">
-                                    <textarea class="form-control" name="description" @keyup.enter="store" v-model="createForm.description"></textarea>
+                                    <textarea class="form-control" @keyup.enter="store" v-model="createForm.description"></textarea>
 
                                     <span class="help-block">
                                         Describe your goal. Ex.) Begin studying HTML5 and CSS3
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Type -->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Type</label>
+
+                                <div class="col-md-7">
+                                    <select class="form-control" name="type" @keyup.enter="update" v-model="createForm.type">
+                                        <option v-for="option in createForm.options" v-bind:value="option.value">
+                                          {{ option.text }}
+                                        </option>
+                                    </select>
+
+                                    <span class="help-block">
+                                        Is this a short, medium or long term goal?
                                     </span>
                                 </div>
                             </div>
@@ -133,10 +150,27 @@
                                 <label class="col-md-3 control-label">Description</label>
 
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" name="redirect" @keyup.enter="update" v-model="editForm.description">
+                                    <input type="text" class="form-control" @keyup.enter="update" v-model="editForm.description">
 
                                     <span class="help-block">
                                         Goal Description
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Type -->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Type</label>
+
+                                <div class="col-md-7">
+                                    <select class="form-control" name="type" @keyup.enter="update" v-model="editForm.type">
+                                        <option v-for="option in editForm.options" v-bind:value="option.value">
+                                          {{ option.text }}
+                                        </option>
+                                    </select>
+
+                                    <span class="help-block">
+                                        Is this a short, medium or long term goal?
                                     </span>
                                 </div>
                             </div>
@@ -176,7 +210,13 @@ function formInitialState() {
         errors: [],
         name: '',
         description: '',
-        id: ''
+        id: '',
+        type: '',
+        options: [
+            { text: 'Short Term', value: 'short_term' },
+            { text: 'Medium Term', value: 'medium_term' },
+            { text: 'Long Term', value: 'long_term' },
+        ]
     }
 }
 
@@ -232,6 +272,7 @@ export default {
             this.editForm.id = goal.id;
             this.editForm.name = goal.name;
             this.editForm.description = goal.description;
+            this.editForm.type = goal.type;
 
             $('#modal-edit-goal').modal('show');
         },
@@ -278,6 +319,7 @@ export default {
                     form.id = '';
                     form.name = '';
                     form.description = '';
+                    form.type = '';
                     form.errors = [];
                     // Close the modal
                     $(modal).modal('hide');

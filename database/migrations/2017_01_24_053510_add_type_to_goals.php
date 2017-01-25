@@ -14,7 +14,7 @@ class AddTypeToGoals extends Migration
     public function up()
     {
         Schema::table('goals', function (Blueprint $table) {
-            $table->enum('type', ['short_term, medium_term, long_term']);
+            $table->enum('type', ['short_term', 'medium_term', 'long_term']);
         });
     }
 

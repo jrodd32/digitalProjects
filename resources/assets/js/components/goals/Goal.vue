@@ -18,6 +18,34 @@
 
 <script>
 export default {
-    props: ['goal', 'editChild', 'deleteChild']
+    props: ['goal', 'editChild', 'deleteChild'],
+    mounted() {
+        this.prepareComponent();
+    },
+    methods: {
+        /**
+         * Prepare the component (Vue 2.x).
+        */
+        prepareComponent() {
+            this.goal.type = this.humanize(this.goal.type);
+        },
+        /*
+            Make Enums Human readable
+        */
+        humanize(goal_type) {
+            console.log(goal_type);
+            if (goal_type === 'short_term') {
+                return 'Short Term';
+            }
+
+            if (goal_type === 'medium_term') {
+                return 'Medium Term';
+            }
+
+            if (goal_type === 'long_term') {
+                return 'Long Term';
+            }
+        }
+    }
 }
 </script>
