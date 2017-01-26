@@ -16,7 +16,7 @@ class Goal extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'type'
+        'name', 'description', 'type', 'user_id'
     ];
 
 

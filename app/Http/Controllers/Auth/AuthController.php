@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Socialite;
 use App\User;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -35,7 +36,7 @@ class AuthController extends Controller
             Socialite::driver('37signals')->user()
         );
 
-        auth()->login($user);
+        Auth::login($user, true);
         return redirect('/');
     }
 }

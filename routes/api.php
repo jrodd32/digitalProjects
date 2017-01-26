@@ -17,10 +17,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::get('/goals', 'GoalController@goals');
-Route::post('/goal-save', 'GoalController@save');
-Route::put('/goal-edit', 'GoalController@edit');
-Route::delete('/goal-delete/{id}', 'GoalController@delete');
+Route::get('/goals', 'GoalController@goals')->middleware('auth:api');
+Route::post('/goal-save', 'GoalController@save')->middleware('auth:api');
+Route::put('/goal-edit', 'GoalController@edit')->middleware('auth:api');
+Route::delete('/goal-delete/{id}', 'GoalController@delete')->middleware('auth:api');
 
 // Route::get('/profile', function (Request $request) {
 //     return $request->user();

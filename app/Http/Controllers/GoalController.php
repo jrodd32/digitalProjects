@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\User;
 use App\Goal;
+use Socialite;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -13,10 +16,11 @@ class GoalController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        // $this->middleware('auth:api');
+        $this->User = new User;
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -53,7 +57,8 @@ class GoalController extends Controller
         $goal = Goal::create([
             'name' => $request->name,
             'description' => $request->description,
-            'type' => $request->type
+            'type' => $request->type,
+            'user_id' => Auth::user()->id
         ]);
 
         return response()->json([
@@ -67,8 +72,11 @@ class GoalController extends Controller
         $goal->name = $request->name;
         $goal->description = $request->description;
         $goal->type = $request->type;
+        // TODO: write a method to create unqique identifier
+        //       that doesn't expose thier user id
+        $goal->user_id = Auth::user()->id;
         if ($goal->save()) {
-            return response()->json('Goal Saved');
+            return response()->json('Goal Saved.');
         } else {
             return response()->json('error');
         }
@@ -77,6 +85,7 @@ class GoalController extends Controller
     public function delete(int $id)
     {
         $goal = Goal::find($id);
+
         if (!$goal->delete()) {
             return response()->json('Error: Goal Not Deleted');
         }
